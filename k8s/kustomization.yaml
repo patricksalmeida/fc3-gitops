@@ -8,4 +8,4 @@ resources:
 images:
 - name: goserver
   newName: patricksalmeida/gitopsfc3
-  newTag: 619482541cfc8516f777ade36a34d5f209617afe
+  newTag: b5204dc2d6aac616436e35258c4384e272eee8a7
