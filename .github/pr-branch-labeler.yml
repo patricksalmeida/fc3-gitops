@@ -1,0 +1,8 @@
+enhancement:
+  head: "feature/*"
+
+devops:
+  head: "ci/*"
+
+documentation:
+  head: "docs/*"
