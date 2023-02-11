@@ -1,7 +1,0 @@
-documentation:
-- docs/*
-- README.md
-
-devops:
-- k8s/*
-- Dockerfile

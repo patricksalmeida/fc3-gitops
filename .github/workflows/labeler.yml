@@ -1,18 +1,17 @@
 name: "Pull Request Labeler"
 on:
+  issues:
+    types: [opened, edited, closed, reopened]
   pull_request:
-    types:
-      - opened
-    branches:
-      - main
+    types: [opened, edited, closed, reopened, synchronize]
+  project_card:
+    types: [created, moved, deleted]
 
 jobs:
-  triage:
-    permissions:
-      contents: read
-      pull-requests: write
+  run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v4
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
