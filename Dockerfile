@@ -7,3 +7,4 @@ FROM scratch
 WORKDIR /app
 COPY --from=build /app/server .
 ENTRYPOINT [ "./server" ]
+
