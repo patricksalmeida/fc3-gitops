@@ -15,6 +15,7 @@ jobs:
         with:
           script: |
             const base_branch = context.payload.pull_request.base.ref;
+            console.log(base_branch)
             const head_branch = context.payload.pull_request.head.ref;
             
             if (head_branch.includes('feat') || head_branch.includes('feature')) {
