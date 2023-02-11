@@ -1,14 +1,23 @@
 name: Add label
 on:
   pull_request:
-    types: [opened, edited, closed, reopened, synchronize]
+    types: [opened, edited, closed, reopened, ready_for_review, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
-  add-label:
+  label:
     runs-on: ubuntu-latest
+    name: Label issues and pull requests
     steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: ./
+      - uses: actions/checkout@v2
+      
+      - uses: IvanFon/super-labeler-action@master
         with:
-          GITHUB_TOKEN: "${{ secrets.BOT_TOKEN }}"
-          config: .github/label-configs.json
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+
+      - uses: actions/labeler@v4
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
