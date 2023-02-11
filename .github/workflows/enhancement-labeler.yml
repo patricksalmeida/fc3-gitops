@@ -14,7 +14,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const head = context.payload.pull_request.head;
+            const head = context.payload.pull_request.head.ref;
             console.log(head)
             if (head.includes('feat') || head.includes('feature')) {
               github.rest.issues.addLabels({
