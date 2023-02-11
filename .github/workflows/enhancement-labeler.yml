@@ -1,8 +1,8 @@
 name: Add label
 on:
   pull_request:
-    types:
-      - opened
+    # types:
+    #   - opened
     branches:
       - main
 jobs:
@@ -14,11 +14,29 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            if (context.ref.includes('feat') || context.ref.includes('feature')) {
+            const base_branch = context.payload.pull_request.base.ref;
+            console.log(base_branch)
+            const head_branch = context.payload.pull_request.head.ref;
+            
+            if (head_branch.includes('feat') || head_branch.includes('feature')) {
               github.rest.issues.addLabels({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 labels: ["enhancement"]
+              })
+            } else if (head_branch.includes('fix') || head_branch.includes('hotfix') || head_branch.includes('bugfix')) {
+              github.rest.issues.addLabels({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: ["bug"]
+              })
+            } else if (base_branch.includes('prod')) {
+              github.rest.issues.addLabels({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: ["deploy"]
               })
             }
