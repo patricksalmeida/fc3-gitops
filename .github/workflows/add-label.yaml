@@ -1,0 +1,19 @@
+name: Add label
+on:
+  issues:
+    types: [opened, edited, closed, reopened]
+  pull_request:
+    types: [opened, edited, closed, reopened, synchronize]
+  project_card:
+    types: [created, moved, deleted]
+  schedule: [cron: "0 * * * *"]
+
+jobs:
+  add-label:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: ./
+        with:
+          GITHUB_TOKEN: "${{ secrets.BOT_TOKEN }}"
+          config: .github/label-configs.json
