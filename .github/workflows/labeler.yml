@@ -1,18 +1,16 @@
-name: "Pull Request Labeler"
+name: Project Management
 on:
   pull_request:
-    types:
-      - opened
-    branches:
-      - main
-
+    types: [opened, edited, closed, reopened, synchronize]
+  
 jobs:
-  triage:
-    permissions:
-      contents: read
-      pull-requests: write
+  release-mastermind:
+    name: Release Mastermind
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v4
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+      - uses: actions/checkout@v2.3.4
+      - name: Release Mastermind
+        uses: Videndum/release-mastermind@0.0.0-alpha.7
+        with:
+          GITHUB_TOKEN: "${{ secrets.BOT_TOKEN }}"
+          config: .github/config.json
