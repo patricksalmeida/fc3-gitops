@@ -1,8 +1,8 @@
 name: Add label
 on:
   pull_request:
-    types:
-      - opened
+    branches:
+      - main
 jobs:
   add_label:
     runs-on: ubuntu-latest
