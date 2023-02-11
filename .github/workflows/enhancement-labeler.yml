@@ -14,8 +14,9 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            console.log(context)
-            if (context.ref.includes('feat') || context.ref.includes('feature')) {
+            const head = context.payload.pull_request.head;
+
+            if (head.includes('feat') || head.includes('feature')) {
               github.rest.issues.addLabels({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
