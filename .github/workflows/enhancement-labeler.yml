@@ -15,7 +15,7 @@ jobs:
         with:
           script: |
             const head = context.payload.pull_request.head;
-
+            console.log(head)
             if (head.includes('feat') || head.includes('feature')) {
               github.rest.issues.addLabels({
                 issue_number: context.issue.number,
